@@ -13,6 +13,10 @@ enum S
     Subtitle, GameFiles, Nup, Folders, DropHint, SaveTo, Build, Browse, Needs, Free, Checking, VersionOk, VersionBad, ToolsMissing, PythonMissing,
     Building, Patience, Elapsed, Read, Lift, Compile, Finish, ShowDetails, HideDetails, Cancel, Back, OpenFolder, Play, Ready, BuiltIn,
     Stopped, Cancelled, CancelledNote, CloseQuestion, LanguageLabel,
+    FoundOnPc, NotListed, DropFileHint, InstallLabel, Change, Default, BuildWorkers, BuildMemory, UpdateTrack,
+    PrepareShaders, DlssOption, DlssNote, FsrOption, FsrNote, AboutTime, BuildingTitle, ReadyUpdated,
+    DesktopShortcut, StartMenu, FreeSpace, ShowFolder, UpdateAvailable, UpToDate, UpdateBuilder, BuildGame,
+    CheckingUpdates, OpenGameFolder, SavePipelineList, ProblemUnchanged, CopyBugReport, Repair,
     // (the update, English only for now: Strings.Text falls back to it)
     Download, Updating, UpdateFailed,
 }
@@ -28,6 +32,11 @@ static class Strings
         "Building", "This takes a while, and your PC stays usable.", "Elapsed", "Reading your game files", "Translating the game to PC code", "Compiling",
         "Putting the game folder together", "Show details", "Hide details", "Cancel", "Back", "Open folder", "Play", "Your game is ready", "built in",
         "The build stopped", "Build cancelled", "You can start again from the same folder.", "Stop the build and close?", "Language",
+        "FOUND ON THIS PC", "Not listed?", " · or drop the file on this window · ", "INSTALL THE GAME TO", "Change", "Default", "BUILD WORKERS", "BUILD MEMORY (GB)", "UPDATE TRACK",
+        "Prepare shaders now", "NVIDIA DLSS (downloads NVIDIA's SDK under NVIDIA's license)", "For NVIDIA RTX graphics cards. NVIDIA's files stay on this PC: never share a game folder built with them.",
+        "AMD FSR 4 (downloads AMD's runtime under AMD's license)", "For AMD Radeon graphics cards. It is chosen in the game's Insert menu, as the Upscaler.", "About 45 min",
+        "Building your game", "Your game is updated", "Desktop shortcut", "Start menu entry", "Free up space", "Show folder", "Update available", "Your game is up to date", "Update builder", "Build the game",
+        "Checking for updates…", "Open the game folder", "Save my pipeline list (helps remove stutter)", "Nothing was changed in your game folder.", "Copy for a bug report", "Repair",
         "Downloading the new version", "Updating your game", "The update could not be downloaded",
     };
     static readonly string[] Fr =
@@ -138,7 +147,12 @@ static class Strings
         "在此应用旁边找不到 Hookshot 工具。", "找不到 Python。",
         "正在生成", "这需要一些时间,期间电脑仍可正常使用。", "已用时间", "正在读取游戏文件", "正在将游戏转换为电脑代码", "正在编译",
         "正在整理游戏文件夹", "显示详细信息", "隐藏详细信息", "取消", "返回", "打开文件夹", "开始游戏", "你的游戏已准备就绪", "用时",
-        "生成已停止", "生成已取消", "你可以从同一文件夹重新开始。", "要停止生成并关闭吗?", "语言",
+        "生成已停止", "生成已取消", "你可以从同一文件夹重新开始。", "要停止生成并关闭吗?", "游戏语言",
+        "此电脑上找到的文件", "没有列出?", " · 或将文件拖放到此窗口 · ", "游戏安装位置", "更改", "默认", "生成线程", "生成内存 (GB)", "更新频道",
+        "立即准备着色器", "NVIDIA DLSS（将根据 NVIDIA 许可下载 NVIDIA SDK）", "适用于 NVIDIA RTX 显卡。NVIDIA 文件只保留在此电脑上：请勿分享使用这些文件生成的游戏文件夹。",
+        "AMD FSR 4（将根据 AMD 许可下载 AMD 运行时）", "适用于 AMD Radeon 显卡。可在游戏的插入菜单中选择它作为升频器。", "约 45 分钟",
+        "正在生成游戏", "你的游戏已更新", "桌面快捷方式", "开始菜单项", "释放空间", "显示文件夹", "有可用更新", "你的游戏已是最新版本", "更新生成器", "生成游戏",
+        "正在检查更新…", "打开游戏文件夹", "保存我的管线列表（有助于减少卡顿）", "游戏文件夹未发生任何更改。", "复制错误报告", "修复",
     };
     static readonly string[] ZhHant =
     {

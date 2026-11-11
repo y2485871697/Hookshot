@@ -69,12 +69,10 @@ public partial class MainWindow : Window
             }
         };
         Loaded += (_, _) => Start();
-        var tools = Tools.Find();
-        ToolsNote.Text = tools != null
-            ? "Nothing else to install: Hookshot's own build tools are here, downloaded and checked by its setup."
-            : "Hookshot's build tools are missing from its folder. Press Build and Hookshot offers to download them again.";
+        SetToolsNote();
         SetStep(0);
         Refresh();
+        ApplyLanguageStrings();
     }
 
     // ================= the start =================
@@ -187,27 +185,27 @@ public partial class MainWindow : Window
         switch (mode)
         {
             case Mode.UpdateGame:
-                FilesTitle.Text = "Update available";
+                FilesTitle.Text = T(S.UpdateAvailable);
                 FilesSub.Text = $"Hookshot {updateTarget} is available. Your game is {game}: Update builds it again from the game files kept in " +
                                 "its folder, compiling only what changed.";
-                BuildButton.Content = "Update";
+                BuildButton.Content = T(S.UpdateAvailable);
                 break;
             case Mode.UpToDate:
-                FilesTitle.Text = "Your game is up to date";
+                FilesTitle.Text = T(S.UpToDate);
                 FilesSub.Text = latestTag == null
                     ? $"Your game is {game}, as this builder. GitHub did not answer, so newer versions could not be checked."
                     : $"{game} is the latest version. Pick game files below only to build it again from scratch.";
-                BuildButton.Content = "Play";
+                BuildButton.Content = T(S.Play);
                 break;
             case Mode.UpdateBuilder:
-                FilesTitle.Text = "Build your game";
+                FilesTitle.Text = T(S.BuildGame);
                 FilesSub.Text = $"Hookshot Builder {updateTarget} is available (this one is {builder}): update it first, then build.";
-                BuildButton.Content = "Update builder";
+                BuildButton.Content = T(S.UpdateBuilder);
                 break;
             default:
-                FilesTitle.Text = "Build your game";
-                FilesSub.Text = "Pick your game files and where the game goes. Hookshot does the rest, once.";
-                BuildButton.Content = "Build the game";
+                FilesTitle.Text = T(S.BuildGame);
+                FilesSub.Text = T(S.Subtitle);
+                BuildButton.Content = T(S.BuildGame);
                 break;
         }
         BuildButton.IsEnabled = mode != Mode.Build || (SourceReady && OutPath.Text.Length > 2);
@@ -832,11 +830,58 @@ public partial class MainWindow : Window
     {
         if (LanguageBox.SelectedItem is not Language l) return;
         lang = l;
-        CancelButton.Content = T(S.Cancel);
-        BackButton.Content = T(S.Back);
+        ApplyLanguageStrings();
+    }
+
+    void ApplyLanguageStrings()
+    {
+        FoundLabel.Text = T(S.FoundOnPc);
+        NotListed.Text = T(S.NotListed);
+        DropNote.Text = T(S.DropFileHint);
+        OtherWays.Content = T(S.Folders);
+        InstallLabel.Text = T(S.InstallLabel);
+        ChangeButton.Content = T(S.Change);
+        WorkChange.Content = T(S.Change);
+        WorkReset.Content = T(S.Default);
+        LanguageLabel.Text = T(S.LanguageLabel).ToUpperInvariant();
+        WorkerLabel.Text = T(S.BuildWorkers);
+        MemoryLabel.Text = T(S.BuildMemory);
+        TrackLabel.Text = T(S.UpdateTrack);
+        PrepareTick.Content = T(S.PrepareShaders);
+        DlssTick.Content = T(S.DlssOption);
+        DlssNote.Text = T(S.DlssNote);
+        FsrTick.Content = T(S.FsrOption);
+        FsrNote.Text = T(S.FsrNote);
+        AboutText.Text = T(S.AboutTime);
+        DesktopTick.Content = T(S.DesktopShortcut);
+        StartTick.Content = T(S.StartMenu);
+        FreeButton.Content = T(S.FreeSpace);
+        ShowFolderButton.Content = T(S.ShowFolder);
         OpenButton.Content = T(S.OpenFolder);
         PlayText.Text = T(S.Play);
+        CancelButton.Content = T(S.Cancel);
+        BackButton.Content = T(S.Back);
         ShowLog.Content = T(ShowLog.IsChecked == true ? S.HideDetails : S.ShowDetails);
+        ProblemSub.Text = T(S.ProblemUnchanged);
+        ProblemDetails.Content = T(S.ShowDetails);
+        CopyReport.Content = T(S.CopyBugReport);
+        RepairButton.Content = T(S.Repair);
+        SetToolsNote();
+        if (!filesReady)
+        {
+            FilesTitle.Text = T(S.BuildGame);
+            FilesSub.Text = T(S.Subtitle);
+            BuildButton.Content = T(S.BuildGame);
+        }
+        if (filesReady && runner == null) RefreshMode();
+    }
+
+    void SetToolsNote()
+    {
+        var tools = Tools.Find();
+        ToolsNote.Text = tools != null
+            ? (lang.Code == "zh-Hans" ? "无需安装其他内容：Hookshot 自带的生成工具已由安装程序下载并检查。" : "Nothing else to install: Hookshot's own build tools are here, downloaded and checked by its setup.")
+            : (lang.Code == "zh-Hans" ? "应用文件夹中缺少 Hookshot 生成工具。点击生成后，Hookshot 会提供重新下载选项。" : "Hookshot's build tools are missing from its folder. Press Build and Hookshot offers to download them again.");
     }
 
     // ================= 2: the build =================
